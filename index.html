@@ -3,176 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Timetable Generator</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f4f8;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #4CAF50;
-      padding: 15px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    nav {
-      background-color: #333;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    nav a {
-      padding: 15px 30px;
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      transition: background-color 0.3s ease;
-      font-size: 16px;
-    }
-    nav a:hover {
-      background-color: #575757;
-    }
-    .container {
-      width: 80%;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    form label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    form input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 15px;
-    }
-    form input:focus {
-      border-color: #4CAF50;
-      outline: none;
-    }
-    button {
-      width: 100%;
-      padding: 15px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    th {
-      background-color: #4CAF50;
-      color: white;
-    }
-    td {
-      background-color: #f9f9f9;
-    }
-    .container button {
-      margin-top: 20px;
-      width: auto;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+  <title>Schedule Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
   <header>
-    <h1>Timetable Generator</h1>
+    <h1>Schedule Planner</h1>
   </header>
   
   <nav>
-    <a href="#" onclick="showPage('login')">Login & Generate</a>
-    <a href="#" onclick="showPage('timetable')">View Timetable</a>
+    <a href="#">Home</a>
+    <a href="#">Login & Generate</a>
+    <a href="#">View Schedule</a>
+    <a href="#">Contact Us</a>
   </nav>
 
   <div class="container">
-    <!-- Login Form -->
-    <div id="login">
-      <form id="timetableForm">
-        <label for="email">Email</label>
-        <input type="email" id="email" required />
+    <!-- Home Page -->
+    <div id="home">
+      <h2>Welcome to Schedule Planner</h2>
+      <p>
+        Schedule Planner is a tool designed to help you generate and manage schedules efficiently. 
+        Whether you're planning for classes, labs, or faculty assignments, our tool provides a simple 
+        and effective way to organize your time.
+      </p>
+   
 
-        <label for="password">Password</label>
-        <input type="password" id="password" required />
-
-        <label for="sections">Total Sections</label>
-        <input type="number" id="sections" value="15" required />
-
-        <label for="sip">SIP Sections</label>
-        <input type="number" id="sip" value="8" required />
-
-        <label for="eep">EEP Sections</label>
-        <input type="number" id="eep" value="7" required />
-
-        <label for="faculty">Total Faculty</label>
-        <input type="number" id="faculty" value="30" required />
-
-        <button type="submit">Generate Timetable</button>
-      </form>
+      <!-- Highlight Cards -->
+      <div class="home-highlight">
+        <div class="card">
+          <h4>Generate Schedules</h4>
+          <p>Create optimized schedules for your classes, labs, or faculty assignments with ease.</p>
+        </div>
+        <div class="card">
+          <h4>View Timetables</h4>
+          <p>Access and review your generated schedules in a clean and organized format.</p>
+        </div>
+        <div class="card">
+          <h4>Contact Support</h4>
+          <p>Need help? Reach out to our support team for assistance with your scheduling needs.</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Timetable Output -->
-    <div id="timetable" style="display: none">
-      <button onclick="downloadPDF()">Download PDF</button>
-      <button onclick="downloadExcel()">Export to Excel</button>
-      <div id="output"></div>
+    <!-- Login Form -->
+    <div id="login" style="display: none;">
+      <div id="login-section">
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div id="generate-section" style="display: none;">
+        <form>
+          <label for="fileInput" class="file-label">
+            <span class="file-button">📂 Choose Excel File</span>
+            <span id="fileName" class="file-name">No file chosen</span>
+          </label>
+          <input type="file" id="fileInput" accept=".xlsx" required style="display: none;" />
+          <br><br>
+
+          <label for="sipCount">SIP Sections</label>
+          <input type="number" id="sipCount" value="2" min="0" required />
+          <br>
+
+          <label for="eepCount">EEP Sections</label>
+          <input type="number" id="eepCount" value="2" min="0" required />
+          <br><br>
+
+          <button type="button" onclick="generateTimetable()">Generate Timetable</button>
+          <br><br>
+        </form>
+      </div>
+    </div>
+
+    <!-- Schedule Output -->
+    <div id="timetable" style="display: none;">
+      <button id="exportButton" onclick="exportToExcel()" style="display: none;">Export to Excel</button>
+      <div id="output" class="timetable-output">
+        <!-- Timetable content will be dynamically generated here -->
+      </div>
+    </div>
+
+    <div id="contact"style="display: none;">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or need assistance, feel free to reach out to us:</p>
+      <ul>
+        <li><span></span> <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJZfSTBfTMMglgMzhKhZQrtMzFKSTqvRQcJJqVgsDQPbbfTdQGDcKPtzlwDQRDJzMWqkcRg" class="email">support@scheduleplanner.com</a> </li>
+        <li><span></span> We are here to help you make the most of your time!</li>
+      </ul>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const sipTimeSlots = ["10:10 - 12:10 PM", "1:00 - 3:00 PM"];
-    const eepTimeSlots = ["9:10 - 12:10 PM", "12:10 - 4:00 PM (Lunch Break: 1:10 - 2:00 PM)"];
+    // Function to show the selected section and hide others
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.container > div').forEach((section) => {
+        section.style.display = 'none';
+      });
 
-    function showPage(id) {
-      document.getElementById("login").style.display = id === 'login' ? 'block' : 'none';
-      document.getElementById("timetable").style.display = id === 'timetable' ? 'block' : 'none';
+      // Show the selected section
+      document.getElementById(sectionId).style.display = 'block';
     }
 
-    document.getElementById("timetableForm").addEventListener("submit", function (e) {
+    // Add event listeners to navigation links
+    document.querySelectorAll('nav a').forEach((link, index) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const sections = ['home', 'login', 'timetable', 'contact'];
+        showSection(sections[index]);
+      });
+    });
+
+    // Show the home section by default
+    showSection('home');
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const email = document.getElementById("email").value;
@@ -183,105 +138,199 @@
         return;
       }
 
-      const totalSections = parseInt(document.getElementById("sections").value);
-      const sipCount = parseInt(document.getElementById("sip").value);
-      const eepCount = parseInt(document.getElementById("eep").value);
-      const totalFaculty = parseInt(document.getElementById("faculty").value);
-
-      const sections = Array.from({ length: totalSections }, (_, i) => `Section ${i + 1}`);
-      const sipSections = sections.slice(0, sipCount);
-      const eepSections = sections.slice(sipCount, sipCount + eepCount);
-      const facultyMembers = Array.from({ length: totalFaculty }, (_, i) => `Faculty ${i + 1}`);
-
-      let timetable = {};
-      days.forEach(day => (timetable[day] = []));
-
-      let assignedFaculties = [];
-
-      function getAvailableFaculty(assigned, all) {
-        const available = all.filter(f => !assigned.includes(f));
-        if (available.length === 0) return null;
-        return available[Math.floor(Math.random() * available.length)];
-      }
-
-      function assignSessionToDay(section, subject, day, timeSlots) {
-        const faculty = getAvailableFaculty(assignedFaculties, facultyMembers);
-        if (!faculty) return false;
-        const time = timeSlots[Math.floor(Math.random() * timeSlots.length)];
-        timetable[day].push({ section, time, subject, faculty });
-        assignedFaculties.push(faculty);
-        return true;
-      }
-
-      const combinedSections = [...sipSections.map(s => ({ section: s, subject: "SIP" })), ...eepSections.map(e => ({ section: e, subject: "EEP" }))];
-      let shuffledCombined = [...combinedSections].sort(() => Math.random() - 0.5);
-      for (let i = 0; i < days.length; i++) {
-        const day = days[i];
-        const { section, subject } = shuffledCombined[i % shuffledCombined.length];
-        const timeSlots = subject === "SIP" ? sipTimeSlots : eepTimeSlots;
-        assignSessionToDay(section, subject, day, timeSlots);
-      }
-
-      function assignRandomSessions(sectionList, subject, timeSlots) {
-        sectionList.forEach(section => {
-          const alreadyAssigned = Object.values(timetable).some(dayArr =>
-            dayArr.some(entry => entry.section === section && entry.subject === subject)
-          );
-          if (alreadyAssigned) return;
-
-          let shuffledDays = [...days].sort(() => Math.random() - 0.5);
-          for (let day of shuffledDays) {
-            if (assignSessionToDay(section, subject, day, timeSlots)) break;
-          }
-        });
-      }
-
-      assignRandomSessions(sipSections, "SIP", sipTimeSlots);
-      assignRandomSessions(eepSections, "EEP", eepTimeSlots);
-
-      renderTimetable(timetable);
-      showPage("timetable");
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("generate-section").style.display = "block";
     });
 
-    function renderTimetable(timetable) {
+    let facultyList = [];
+    let generatedTimetableBlob = null;
+
+    document.getElementById("fileInput").addEventListener("change", function () {
+      const fileName = this.files[0] ? this.files[0].name : "No file chosen";
+      document.getElementById("fileName").textContent = fileName;
+    });
+
+    document.getElementById("fileInput").addEventListener("change", handleFile, false);
+
+    function handleFile(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const json = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+        facultyList = json.map(row => ({
+          sno: parseInt(row["S.NO."]),
+          name: row["FACULTY NAME"],
+          sipLoad: parseFloat(row["SIP LOAD"]),
+          eepLoad: parseFloat(row["EEP LOAD"]),
+          schedule: {}
+        }));
+
+        alert("Faculty data loaded.");
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function generateTimetable() {
+      const sipSections = parseInt(document.getElementById("sipCount").value);
+      const eepSections = parseInt(document.getElementById("eepCount").value);
+
+      if (sipSections === 0 && eepSections === 0) {
+        alert("Both SIP and EEP sections are set to 0. Nothing to generate.");
+        return;
+      }
+
+      const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const SIP_SLOTS = ["10:10 - 12:10 PM", "1:00 - 3:00 PM"];
+      const EEP_SLOTS = ["9:10 - 12:10 PM", "12:10 - 4:00 PM (Lunch Break: 1:10 - 2:00 PM)"];
+      const SIP_HOURS = 2;
+      const EEP_HOURS = 3;
+
+      let schedule = [];
+      let sipAssigned = 0;
+      let eepAssigned = 0;
+
+      while ((sipSections > 0 && sipAssigned < sipSections) || (eepSections > 0 && eepAssigned < eepSections)) {
+        let progress = false;
+
+        for (const day of DAYS) {
+          if (sipSections > 0) {
+            for (const slot of SIP_SLOTS) {
+              if (sipAssigned >= sipSections) break;
+              const row = assign("SIP", sipAssigned + 1, SIP_HOURS, day, slot);
+              if (row) {
+                schedule.push(row);
+                sipAssigned++;
+                progress = true;
+              }
+            }
+          }
+
+          if (eepSections > 0) {
+            for (const slot of EEP_SLOTS) {
+              if (eepAssigned >= eepSections) break;
+              const row = assign("EEP", eepAssigned + 1, EEP_HOURS, day, slot);
+              if (row) {
+                schedule.push(row);
+                eepAssigned++;
+                progress = true;
+              }
+            }
+          }
+
+          if ((sipAssigned >= sipSections || sipSections === 0) &&
+              (eepAssigned >= eepSections || eepSections === 0)) {
+            break;
+          }
+        }
+
+        if (!progress) break; // no more assignable slots
+      }
+
+      if ((sipSections > 0 && sipAssigned < sipSections) || (eepSections > 0 && eepAssigned < eepSections)) {
+        alert("Unable to assign all sections with current faculty workload.");
+      }
+
+      const ws = XLSX.utils.json_to_sheet(schedule, {
+        header: ["DAY", "CLASS", "SESSION", "FACULTY-1", "FACULTY-2", "FACULTY-3"]
+      });
+
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Timetable");
+
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+      generatedTimetableBlob = new Blob([wbout], { type: "application/octet-stream" });
+
+      // Enable the "Export to Excel" button in the "View Schedule" tab
+      const exportButton = document.getElementById("exportButton");
+      exportButton.style.display = "inline";
+
+      // Render the timetable in the "View Schedule" tab
+      renderTimetable(schedule);
+
+      // Automatically navigate to the "View Schedule" tab
+      showSection('timetable');
+    }
+
+    function renderTimetable(schedule) {
+      const outputDiv = document.getElementById("output");
       let html = "";
-      for (const day of days) {
+
+      const groupedByDay = schedule.reduce((acc, row) => {
+        if (!acc[row.DAY]) acc[row.DAY] = [];
+        acc[row.DAY].push(row);
+        return acc;
+      }, {});
+
+      for (const day in groupedByDay) {
         html += `<h3>${day}</h3>`;
-        html += `<table><tr><th>Section</th><th>Time</th><th>Subject</th><th>Faculty</th></tr>`;
-        timetable[day].forEach(session => {
-          html += `<tr><td>${session.section}</td><td>${session.time}</td><td>${session.subject}</td><td>${session.faculty}</td></tr>`;
+        html += `<table><tr><th>Class</th><th>Session</th><th>Faculty 1</th><th>Faculty 2</th><th>Faculty 3</th></tr>`;
+        groupedByDay[day].forEach(row => {
+          html += `<tr>
+            <td>${row.CLASS}</td>
+            <td>${row.SESSION}</td>
+            <td>${row["FACULTY-1"]}</td>
+            <td>${row["FACULTY-2"]}</td>
+            <td>${row["FACULTY-3"]}</td>
+          </tr>`;
         });
         html += `</table>`;
       }
-      document.getElementById("output").innerHTML = html;
+
+      outputDiv.innerHTML = html;
     }
 
-    function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("Timetable", 10, 10);
-      let y = 20;
-      for (const day of days) {
-        doc.text(`${day}:`, 10, y);
-        timetable[day].forEach(session => {
-          doc.text(`Section: ${session.section}, Time: ${session.time}, Subject: ${session.subject}, Faculty: ${session.faculty}`, 10, y += 10);
-        });
-        y += 20;
-      }
-      doc.save("timetable.pdf");
-    }
-
-    function downloadExcel() {
-      const ws = XLSX.utils.aoa_to_sheet([["Section", "Time", "Subject", "Faculty"]]);
-      days.forEach(day => {
-        timetable[day].forEach(session => {
-          XLSX.utils.sheet_add_aoa(ws, [[session.section, session.time, session.subject, session.faculty]], { origin: -1 });
-        });
+    function assign(type, sectionNo, hours, day, slot) {
+      const available = facultyList.filter(f => {
+        const rem = type === "SIP" ? f.sipLoad : f.eepLoad;
+        return rem >= hours && !(f.schedule[day]?.includes(slot));
       });
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Timetable");
-      XLSX.writeFile(wb, "timetable.xlsx");
+
+      const shuffled = available.sort(() => Math.random() - 0.5);
+
+      const mains = shuffled.filter(f => f.sno >= 1 && f.sno <= 13);
+      const subs = shuffled.filter(f => f.sno > 13);
+
+      if (mains.length < 1 || subs.length < 2) return null;
+
+      const main = mains[0];
+      const sub1 = subs[0];
+      const sub2 = subs[1];
+
+      [main, sub1, sub2].forEach(f => {
+        if (!f.schedule[day]) f.schedule[day] = [];
+        f.schedule[day].push(slot);
+        if (type === "SIP") f.sipLoad -= hours;
+        else f.eepLoad -= hours;
+      });
+
+      return {
+        "DAY": day.toUpperCase(),
+        "CLASS": `${type}-Sec${sectionNo}`,
+        "SESSION": slot,
+        "FACULTY-1": main.name,
+        "FACULTY-2": sub1.name,
+        "FACULTY-3": sub2.name
+      };
+    }
+
+    function exportToExcel() 
+    {
+      if (!generatedTimetableBlob) {
+        alert("No timetable generated to export.");
+        return;
+      }
+
+      const url = URL.createObjectURL(generatedTimetableBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "final_timetable_output.xlsx";
+      link.click();
     }
   </script>
+
 </body>
 </html>
